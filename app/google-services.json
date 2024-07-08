@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "54675619484",
+    "firebase_url": "https://velkhana-store-a982e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "velkhana-store-a982e",
+    "storage_bucket": "velkhana-store-a982e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54675619484:android:fe6a8ecd1c01f993683759",
+        "android_client_info": {
+          "package_name": "com.example.velkhana_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGKKDZyrF49I73-tv_lv84kYr7ktGaxN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
