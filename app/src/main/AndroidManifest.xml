@@ -23,6 +23,9 @@
         <activity
             android:name=".Comment"
             android:exported="false"/>
+        <activity
+            android:name=".ArknightsFormTopup"
+            android:exported="false"/>
 
         <activity
             android:name=".MainActivity"

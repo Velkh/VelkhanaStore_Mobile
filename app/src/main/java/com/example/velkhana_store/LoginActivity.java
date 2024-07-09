@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "Login successful");
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                         // Move to the CommentActivity
-                        Intent intent = new Intent(LoginActivity.this, Comment.class);
+                        Intent intent = new Intent(LoginActivity.this, ArknightsFormTopup.class);
                         startActivity(intent);
                         finish();
                     } else {

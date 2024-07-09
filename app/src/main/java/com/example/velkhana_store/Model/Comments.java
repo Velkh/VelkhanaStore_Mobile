@@ -1,31 +1,41 @@
 package com.example.velkhana_store.Model;
 
 public class Comments {
-    private String username;
-    private String comms;
+    private String name;
+    private String comment;
+    private String timestamp;
 
     public Comments() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+        // Default constructor required for calls to DataSnapshot.getValue(Comments.class)
     }
 
-    public Comments(String username, String comms) {
-        this.username = username;
-        this.comms = comms;
+    public Comments(String name, String comment, String timestamp) {
+        this.name = name;
+        this.comment = comment;
+        this.timestamp = timestamp;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getComms() {
-        return comms;
+    public String getComment() {
+        return comment;
     }
 
-    public void setComms(String comms) {
-        this.comms = comms;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }
