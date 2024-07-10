@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText loginUsername, loginPassword;
     private Button loginButton;
+    private TextView registerTextView;
     private DatabaseReference databaseReference;
 
     private static final String TAG = "LoginActivity";
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         loginUsername = findViewById(R.id.loginUsername);
         loginPassword = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
+        registerTextView = findViewById(R.id.Register);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -42,6 +45,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser();
+            }
+        });
+
+        registerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the RegisterActivity
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -63,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (user != null && user.getPassword().equals(password)) {
                         Log.d(TAG, "Login successful");
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        // Move to the CommentActivity
+                        // Move to the ArknightsFormTopup activity
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();

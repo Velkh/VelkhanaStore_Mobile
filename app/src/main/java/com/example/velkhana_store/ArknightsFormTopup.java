@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,10 +38,11 @@ import com.example.velkhana_store.Model.Payment;
 public class ArknightsFormTopup extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText accid, email, phone, jumlah;
-    private Spinner platform, diamonds;
+    private EditText accid, email, phone;
+    private Spinner platform, jumlah;
     private TextView paymentPhone, price;
     private Button uploadImage, submit;
+    private ImageView imagePreview;
     private Uri imageUri;
 
     private StorageReference storageReference;
@@ -56,17 +58,17 @@ public class ArknightsFormTopup extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         jumlah = findViewById(R.id.jumlah);
         platform = findViewById(R.id.platform);
-        diamonds = findViewById(R.id.diamonds);
         paymentPhone = findViewById(R.id.payment_phone);
         price = findViewById(R.id.price);
         uploadImage = findViewById(R.id.upload_image);
+        imagePreview = findViewById(R.id.image_preview);
         submit = findViewById(R.id.submit);
 
         storageReference = FirebaseStorage.getInstance().getReference("Bukti_Pembayaran");
         databaseReference = FirebaseDatabase.getInstance().getReference("Payment");
 
         setupPlatformSpinner();
-        setupDiamondsSpinner();
+        setupJumlahSpinner();
 
         platform.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -93,20 +95,20 @@ public class ArknightsFormTopup extends AppCompatActivity {
             }
         });
 
-        diamonds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        jumlah.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Map<Integer, String> prices = new HashMap<>();
-                prices.put(5, "Price: Rp 70.671");
-                prices.put(11, "Price: Rp 381.620");
-                prices.put(17, "Price: Rp 14.050");
-                prices.put(25, "Price: Rp 70.250");
-                prices.put(33, "Price: Rp 210.750");
-                prices.put(154, "Price: Rp 421.500");
-                prices.put(256, "Price: Rp 702.500");
-                prices.put(333, "Price: Rp 1.405.000");
+                Map<String, String> prices = new HashMap<>();
+                prices.put("Monthly Card", "Price: Rp 70.671");
+                prices.put("Monthly Headhunting Pack", "Price: Rp 381.620");
+                prices.put("1 Originium", "Price: Rp 14.050");
+                prices.put("6 Originium", "Price: Rp 70.250");
+                prices.put("20 Originium", "Price: Rp 210.750");
+                prices.put("40 Originium", "Price: Rp 421.500");
+                prices.put("66 Originium", "Price: Rp 702.500");
+                prices.put("130 Originium", "Price: Rp 1.405.000");
 
-                price.setText(prices.get(diamonds.getSelectedItemPosition()));
+                price.setText(prices.get(jumlah.getSelectedItem().toString()));
             }
 
             @Override
@@ -137,11 +139,11 @@ public class ArknightsFormTopup extends AppCompatActivity {
         platform.setAdapter(adapter);
     }
 
-    private void setupDiamondsSpinner() {
+    private void setupJumlahSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.diamonds_array, android.R.layout.simple_spinner_item);
+                R.array.jumlah_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        diamonds.setAdapter(adapter);
+        jumlah.setAdapter(adapter);
     }
 
     private void openFileChooser() {
@@ -157,6 +159,7 @@ public class ArknightsFormTopup extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             imageUri = data.getData();
+            imagePreview.setImageURI(imageUri);
         }
     }
 
@@ -192,11 +195,11 @@ public class ArknightsFormTopup extends AppCompatActivity {
     }
 
     private void saveFormData(String imageUrl) {
-        String gameId = "1";
+        Integer gameId = 1;
         String accId = accid.getText().toString().trim();
         String email = this.email.getText().toString().trim();
         String phone = this.phone.getText().toString().trim();
-        String jumlah = this.jumlah.getText().toString().trim();
+        String jumlah = this.jumlah.getSelectedItem().toString();
         String platform = this.platform.getSelectedItem().toString();
         String status = "Order Process";
 
@@ -226,11 +229,11 @@ public class ArknightsFormTopup extends AppCompatActivity {
         accid.setText("");
         email.setText("");
         phone.setText("");
-        jumlah.setText("");
+        jumlah.setSelection(0);
         platform.setSelection(0);
-        diamonds.setSelection(0);
         paymentPhone.setVisibility(View.GONE);
         price.setText("");
+        imagePreview.setImageURI(null);
     }
 
     private String getFileExtension(Uri uri) {

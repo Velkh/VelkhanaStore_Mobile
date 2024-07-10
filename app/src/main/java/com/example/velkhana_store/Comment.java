@@ -1,5 +1,6 @@
 package com.example.velkhana_store;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -73,10 +74,10 @@ public class Comment extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    replaceFragment(new HomeFragment());
+                    startActivity(new Intent(Comment.this, HomeActivity.class));
                     break;
                 case R.id.nav_comments:
-                    replaceFragment(new CommentFragment());
+                    startActivity(new Intent(Comment.this, Comment.class));
                     break;
                 case R.id.nav_logout:
                     // Handle logout action
@@ -91,10 +92,10 @@ public class Comment extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home:
-                    replaceFragment(new HomeFragment());
+                    startActivity(new Intent(Comment.this, HomeActivity.class));
                     break;
                 case R.id.comment:
-                    replaceFragment(new CommentFragment());
+                    startActivity(new Intent(Comment.this, Comment.class));
                     break;
             }
             return true;

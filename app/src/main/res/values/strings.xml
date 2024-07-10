@@ -11,15 +11,15 @@
         <item>dana</item>
         <item>gopay</item>
     </string-array>
-    <string-array name="diamonds_array">
-        <item>5</item>
-        <item>11</item>
-        <item>17</item>
-        <item>25</item>
-        <item>33</item>
-        <item>154</item>
-        <item>256</item>
-        <item>333</item>
+    <string-array name="jumlah_array">
+        <item>Monthly Card</item>
+        <item>Monthly Headhunting Pack</item>
+        <item>1 Originium</item>
+        <item>6 Originium</item>
+        <item>20 Originium</item>
+        <item>40 Originium</item>
+        <item>66 Originium</item>
+        <item>130 Originium</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

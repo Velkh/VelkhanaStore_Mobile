@@ -1,19 +1,20 @@
 package com.example.velkhana_store.Model;
 
 public class Payment {
-    private String gameId;
+    private Integer gameId;
     private String accid;
     private String email;
     private String phone;
     private String jumlah;
-    private String platform;    private String imageURL;
+    private String platform;
+    private String imageURL;
     private String status;
 
+    // Default constructor required for calls to DataSnapshot.getValue(Payment.class)
     public Payment() {
-        // Default constructor required for calls to DataSnapshot.getValue(Payment.class)
     }
 
-    public Payment(String gameId, String accid, String email, String phone, String jumlah, String platform, String imageURL, String status) {
+    public Payment(Integer gameId, String accid, String email, String phone, String jumlah, String platform, String imageURL, String status) {
         this.gameId = gameId;
         this.accid = accid;
         this.email = email;
@@ -24,11 +25,11 @@ public class Payment {
         this.status = status;
     }
 
-    public String getGameId() {
+    public Integer getGameId() {
         return gameId;
     }
 
-    public void setGameId(String gameId) {
+    public void setGameId(Integer gameId) {
         this.gameId = gameId;
     }
 
