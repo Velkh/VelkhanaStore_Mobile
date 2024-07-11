@@ -1,24 +1,35 @@
 package com.example.velkhana_store;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import com.bumptech.glide.Glide;
+import com.example.velkhana_store.Model.Item;
 
 public class DetailActivity extends AppCompatActivity {
+
+    private TextView nameTextView;
+    private ImageView imageView;
+    private TextView descriptionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detail);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        nameTextView = findViewById(R.id.nameTextView);
+        imageView = findViewById(R.id.imageView);
+        descriptionTextView = findViewById(R.id.descriptionTextView);
+
+        // Get the passed item
+        Item item = (Item) getIntent().getSerializableExtra("item");
+
+        // Set the item details
+        if (item != null) {
+            nameTextView.setText(item.getName());
+            Glide.with(this).load(item.getImageUrl()).into(imageView);
+            descriptionTextView.setText(item.getDescription());
+        }
     }
 }
