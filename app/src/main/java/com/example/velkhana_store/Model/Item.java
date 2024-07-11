@@ -1,8 +1,6 @@
 package com.example.velkhana_store.Model;
 
-import java.io.Serializable;
-
-public class Item implements Serializable {
+public class Item {
     private String category;
     private String description;
     private String imageUrl;

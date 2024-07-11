@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.example.velkhana_store.DetailActivity;
 import com.example.velkhana_store.Model.Item;
 import com.example.velkhana_store.R;
+
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
@@ -25,14 +26,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = itemList.get(position);
-        holder.bind(item);
+        holder.name.setText(item.getName());
+        holder.description.setText(item.getDescription());
+        Glide.with(holder.itemView.getContext()).load(item.getImageUrl()).into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle item click
+                Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                intent.putExtra("itemId", item.getId()); // Assuming getId() returns item ID
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -41,26 +54,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView;
-        public ImageView imageView;
+        TextView name, description;
+        ImageView imageView;
 
-        public ItemViewHolder(View itemView) {
+        public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.nameTextView);
-            imageView = itemView.findViewById(R.id.imageView);
-        }
-
-        public void bind(final Item item) {
-            nameTextView.setText(item.getName());
-            Glide.with(itemView.getContext()).load(item.getImageUrl()).into(imageView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
-                    intent.putExtra("item", item);
-                    itemView.getContext().startActivity(intent);
-                }
-            });
+            name = itemView.findViewById(R.id.item_name);
+            description = itemView.findViewById(R.id.item_description);
+            imageView = itemView.findViewById(R.id.item_image);
         }
     }
 }

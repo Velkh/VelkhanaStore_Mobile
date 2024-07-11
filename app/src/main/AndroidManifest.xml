@@ -16,6 +16,9 @@
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ItemListActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
